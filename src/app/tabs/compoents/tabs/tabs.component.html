@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a
+    *ngFor="let tab of tabLinks"
+    [routerLink]="tab.link"
+    routerLinkActive
+    mat-tab-link
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+    label="lightweight-charts"
+  >
+    {{tab.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>

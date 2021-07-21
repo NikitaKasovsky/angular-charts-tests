@@ -112,5 +112,17 @@
       }
     }
   },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss",
+      "skipTests": true
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
+    }
+  },
   "defaultProject": "angular-charts-tests"
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LightweightChartsComponent } from './components/lightweight-charts/lightweight-charts.component';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { LightweightChartsComponent } from './components/lightweight-charts/ligh
     LightweightChartsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CoreModule
   ]
 })
 export class ChartsModule { }

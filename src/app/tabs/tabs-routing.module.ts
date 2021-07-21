@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LightweightChartsComponent } from "../charts/components/lightweight-charts/lightweight-charts.component";
-import { TabsComponent } from "./compoents/tabs/tabs.component";
+import { LightweightChartsComponent } from '../charts/components/lightweight-charts/lightweight-charts.component';
+import { TabsComponent } from './compoents/tabs/tabs.component';
+import { TokenIvResolver } from './resolvers/token-iv.resolver';
 
 const routes: Routes = [
   {
@@ -15,7 +16,10 @@ const routes: Routes = [
       },
       {
         path: 'lightweight-charts',
-        component: LightweightChartsComponent
+        component: LightweightChartsComponent,
+        resolve: {
+          token: TokenIvResolver
+        }
       },
     ]
   }

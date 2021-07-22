@@ -7,6 +7,7 @@ import { ChartsHttpResponsesService } from '../../../core/services/charts-http-r
 import { getHttpParams } from '../../../shared/helpers/utils.helper';
 import { ActivatedRoute } from '@angular/router';
 import { map } from "rxjs/operators";
+import { ChartsHttpInterface } from "../../../core/interfaces/charts-http";
 
 @Component({
   selector: 'app-lightweight-charts',
@@ -28,7 +29,6 @@ export class LightweightChartsComponent implements OnInit {
 
   private chart: any;
   private userId = 221023;
-  private uuid = '9C158135-D1F2-4B1B-BEFB-45779F4462B5';
   private token: string = '';
 
   public ngOnInit(): void {
@@ -47,13 +47,23 @@ export class LightweightChartsComponent implements OnInit {
     }
 
     this.chartsHttpResponsesService.getLCHistory(getHttpParams(params), this.token)
-      .subscribe((data) => {
-        console.log(data)
+      .subscribe((points: any) => {
+        this.setData(points as ChartsHttpInterface)
       })
   }
 
   private initChart(): void {
     const container = document.getElementById('lightweight-chart') as HTMLElement;
     this.chart = createChart(container, {width: 1000, height: 500});
+  }
+
+  private setData(points: ChartsHttpInterface): void {
+    this.chart.addLineSeries().setData(this.mapData(points))
+  }
+
+  private mapData(points: ChartsHttpInterface): Object {
+    return points.t.map((timePoint, index) => {
+      return {time: timePoint, value: points.v[index]}
+    })
   }
 }

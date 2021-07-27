@@ -2,18 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import {
-  BarData,
-  createChart
-} from 'lightweight-charts';
+import { createChart } from 'lightweight-charts';
 import { ChartsHttpResponsesService } from '../../../core/services/charts-http-responses.service';
 import { getHttpParams } from '../../../shared/helpers/utils.helper';
 import { ActivatedRoute } from '@angular/router';
-import { map } from "rxjs/operators";
 import { ChartsHttpInterface } from "../../../core/interfaces/charts-http";
 import {
   getAAPL,
-  getTSLA
+  getTSLA,
+  historyParams
 } from "./stocks.locale";
 import { zip } from "rxjs";
 
@@ -29,24 +26,31 @@ export class LightweightChartsComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.data
-      .pipe(map(data => data.token))
-      .subscribe((token: string) => {
-        this.token = token
+      .subscribe((data: any) => {
+        this.token = data.token;
+        this.nextTime = data.initialStock.nextTime;
       });
   }
 
   private chart: any;
   private token: string = '';
+  private nextTime: number = 0;
 
   public ngOnInit(): void {
+    this.chartsHttpResponsesService.getRestApiToken()
+      .subscribe(console.log);
     this.initChart();
-    this.loadHistory();
+    this.loadHistory({
+      resolution: '1',
+      from: (this.nextTime - 60 * 60 * 24).toString(),
+      to: (this.nextTime).toString()
+    });
   }
 
-  private loadHistory(): void {
+  private loadHistory(historyParams: historyParams): void {
     zip(
-      this.chartsHttpResponsesService.getLCHistory(getHttpParams(getTSLA()), this.token),
-      this.chartsHttpResponsesService.getLCHistory(getHttpParams(getAAPL()), this.token)
+      // this.chartsHttpResponsesService.getLCHistory(getHttpParams(getTSLA(historyParams)), this.token),
+      this.chartsHttpResponsesService.getLCHistory(getHttpParams(getAAPL(historyParams)), this.token)
     )
       .subscribe((allPoints) => {
         allPoints.forEach(points => this.setData(points as ChartsHttpInterface));

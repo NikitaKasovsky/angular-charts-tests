@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LightweightChartsComponent } from '../charts/components/lightweight-charts/lightweight-charts.component';
 import { TabsComponent } from './compoents/tabs/tabs.component';
 import { TokenIvResolver } from './resolvers/token-iv.resolver';
+import { NextTimeResolverResolver } from "./resolvers/next-time-resolver.resolver";
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
         path: 'lightweight-charts',
         component: LightweightChartsComponent,
         resolve: {
-          token: TokenIvResolver
+          token: TokenIvResolver,
+          initialStock: NextTimeResolverResolver
         }
       },
     ]

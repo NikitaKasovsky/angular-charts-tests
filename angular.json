@@ -114,13 +114,15 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss",
       "skipTests": true
     },
     "@schematics/angular:directive": {
       "skipTests": true
     },
     "@schematics/angular:service": {
+      "skipTests": true
+    },
+    "@schematics/angular:resolver": {
       "skipTests": true
     }
   },

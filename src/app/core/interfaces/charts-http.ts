@@ -7,7 +7,7 @@
  * v - volume, объём. По нему строим бары
  */
 
-export interface ChartsHttpInterface {
+export interface IChartsHttp {
   t: number[];
   c: number[];
   o: number[];
@@ -15,4 +15,60 @@ export interface ChartsHttpInterface {
   l: number[];
   v: number[];
   s: string;
+}
+
+export interface IRestRT {
+  status: Status;
+  query: Query;
+  data: Datum[];
+}
+
+export interface Status {
+  executionTime: number;
+  recordsFound: number;
+  code: string;
+}
+
+export interface Query {
+  requestUUID: string;
+  stockId: string;
+  strikeMin: string;
+  strikeMax: string;
+}
+
+export interface Datum {
+  symbol: string;
+  stockId: number;
+  expirationDate: Date;
+  strike: number;
+  type: string;
+  style: string;
+  openInterest: number;
+  bidPrice: number;
+  askPrice: number;
+  lastPrice: number;
+  bidDate: string;
+  askDate: string;
+  lastDate: string;
+  bidSize: number;
+  askSize: number;
+  underlyingPrice: number;
+  iv: number;
+  delta: number;
+  vega: number;
+  gamma: number;
+  theta: number;
+  rho: number;
+  preIv: number;
+  theoPrice: number;
+  forwardPrice: number;
+  timestamp: Date;
+  sentToESTimestamp: Date;
+  cumulativeVolume?: number;
+}
+
+export interface ITokenRestApiResponse {
+  login: string,
+  token: string,
+  userID: number
 }

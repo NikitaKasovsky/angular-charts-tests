@@ -7,13 +7,13 @@ import {
 import { Observable } from 'rxjs';
 import { ChartsHttpResponsesService } from "../../core/services/charts-http-responses.service";
 import { getHttpParams } from "../../shared/helpers/utils.helper";
-import { ChartsHttpInterface } from "../../core/interfaces/charts-http";
+import { IChartsHttp } from "../../core/interfaces/charts-http";
 import { getAAPL } from "../../charts/components/lightweight-charts/stocks.locale";
 
 @Injectable({
   providedIn: 'root'
 })
-export class NextTimeResolverResolver implements Resolve<ChartsHttpInterface | null> {
+export class NextTimeResolverResolver implements Resolve<IChartsHttp | null> {
 
   constructor(
     private readonly chartsHttpResponsesService: ChartsHttpResponsesService
@@ -22,8 +22,8 @@ export class NextTimeResolverResolver implements Resolve<ChartsHttpInterface | n
 
   private token: string = '';
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ChartsHttpInterface | null> {
-    this.token = sessionStorage.getItem('token') as string;
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IChartsHttp | null> {
+    this.token = sessionStorage.getItem('token-iv') as string;
     return this.chartsHttpResponsesService.getLCHistory(getHttpParams(getAAPL(
       {
         resolution: '1',

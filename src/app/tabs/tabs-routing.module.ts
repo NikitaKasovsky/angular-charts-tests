@@ -4,6 +4,8 @@ import { LightweightChartsComponent } from '../charts/components/lightweight-cha
 import { TabsComponent } from './compoents/tabs/tabs.component';
 import { TokenIvResolver } from './resolvers/token-iv.resolver';
 import { NextTimeResolverResolver } from "./resolvers/next-time-resolver.resolver";
+import { ChartJsComponent } from "../charts/components/chart-js/chart-js.component";
+import { TokenRestResolver } from "./resolvers/token-rest.resolver";
 
 const routes: Routes = [
   {
@@ -23,6 +25,13 @@ const routes: Routes = [
           initialStock: NextTimeResolverResolver
         }
       },
+      {
+        path: 'chart-js',
+        component: ChartJsComponent,
+        resolve: {
+          token: TokenRestResolver
+        }
+      }
     ]
   }
 ];

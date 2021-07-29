@@ -6,7 +6,7 @@ import { createChart } from 'lightweight-charts';
 import { ChartsHttpResponsesService } from '../../../core/services/charts-http-responses.service';
 import { getHttpParams } from '../../../shared/helpers/utils.helper';
 import { ActivatedRoute } from '@angular/router';
-import { ChartsHttpInterface } from "../../../core/interfaces/charts-http";
+import { IChartsHttp } from "../../../core/interfaces/charts-http";
 import {
   getAAPL,
   getTSLA,
@@ -53,7 +53,7 @@ export class LightweightChartsComponent implements OnInit {
       this.chartsHttpResponsesService.getLCHistory(getHttpParams(getAAPL(historyParams)), this.token)
     )
       .subscribe((allPoints) => {
-        allPoints.forEach(points => this.setData(points as ChartsHttpInterface));
+        allPoints.forEach(points => this.setData(points as IChartsHttp));
         this.chart.addBarSeries().setData();
       });
   }
@@ -63,7 +63,7 @@ export class LightweightChartsComponent implements OnInit {
     this.chart = createChart(container, {width: 1000, height: 500});
   }
 
-  private setData(points: ChartsHttpInterface): void {
+  private setData(points: IChartsHttp): void {
     this.chart.addLineSeries().setData(this.mapTimeData(points.t, points.c));
     this.chart.addHistogramSeries({
       color: '#26a69a',
@@ -85,7 +85,7 @@ export class LightweightChartsComponent implements OnInit {
     });
   }
 
-  private mapCandleData(points: ChartsHttpInterface): Object {
+  private mapCandleData(points: IChartsHttp): Object {
     return points.t.map((timePoint, index) => {
       return {
         time: timePoint,

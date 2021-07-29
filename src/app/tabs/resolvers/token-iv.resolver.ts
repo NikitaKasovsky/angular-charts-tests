@@ -8,8 +8,8 @@ import {
   Observable
 } from 'rxjs';
 import { ChartsHttpResponsesService } from '../../core/services/charts-http-responses.service';
-import { getHttpParams } from "../../shared/helpers/utils.helper";
-import { map } from "rxjs/operators";
+import { getHttpParams } from '../../shared/helpers/utils.helper';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class TokenIvResolver implements Resolve<string> {
 
     return this.chartsHttpResponsesService.getIVToken(getHttpParams(params))
       .pipe(map((token: string) => {
-        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('token-iv', token)
         return token;
       }))
   }

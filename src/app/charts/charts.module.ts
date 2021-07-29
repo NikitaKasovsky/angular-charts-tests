@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { LightweightChartsComponent } from './components/lightweight-charts/lightweight-charts.component';
 import { CoreModule } from '../core/core.module';
+import { ChartJsComponent } from './components/chart-js/chart-js.component';
 
 
 @NgModule({
   declarations: [
-    LightweightChartsComponent
+    LightweightChartsComponent,
+    ChartJsComponent
   ],
   exports: [
-    LightweightChartsComponent
+    LightweightChartsComponent,
+    ChartJsComponent
   ],
   imports: [
     CommonModule,

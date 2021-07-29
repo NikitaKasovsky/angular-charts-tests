@@ -9,14 +9,17 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class TabsComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) { }
 
   public tabLinks = [
     {
       label: 'Lightweight-charts',
       link: './lightweight-charts'
+    },
+    {
+      label: 'Chart-JS',
+      link: './chart-js'
     }
   ];
   private activeTabIndex = -1;
